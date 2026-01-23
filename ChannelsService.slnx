@@ -1,1 +1,10 @@
-<Solution />
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ChannelsService.Core/ChannelsService.Core.csproj" />
+    <Project Path="src/ChannelsService.External/ChannelsService.External.csproj" />
+    <Project Path="src/ChannelsService.UseCases/ChannelsService.UseCases.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ChannelsService.UnitTests/ChannelsService.UnitTests.csproj" />
+  </Folder>
+</Solution>
