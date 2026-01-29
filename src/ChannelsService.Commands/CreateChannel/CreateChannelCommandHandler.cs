@@ -2,13 +2,13 @@ using ChannelsService.Core.Entities;
 using ChannelsService.External.Database;
 using FluentResults;
 
-namespace ChannelsService.UseCases.CreateChannel;
+namespace ChannelsService.Commands.CreateChannel;
 
-internal sealed class CreateChannelHandler : IHandler<CreateChannelCommand>
+internal sealed class CreateChannelCommandHandler : ICommandHandler<CreateChannelCommand>
 {
     private readonly DatabaseContext _context;
     
-    public CreateChannelHandler(DatabaseContext context)
+    public CreateChannelCommandHandler(DatabaseContext context)
     {
         _context = context;
     }

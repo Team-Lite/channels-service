@@ -1,14 +1,14 @@
 using FluentResults;
 
-namespace ChannelsService.UseCases;
+namespace ChannelsService.Commands;
 
-public interface IHandler<in TCommand>
+public interface ICommandHandler<in TCommand>
     where TCommand : Command
 {
     public Task<Result> HandleAsync(TCommand command);
 }
 
-public interface IHandler<in TCommand, TResult> 
+public interface ICommandHandler<in TCommand, TResult> 
     where TCommand : Command 
     where TResult : class
 {

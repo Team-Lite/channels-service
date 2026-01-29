@@ -4,13 +4,13 @@ using ChannelsService.External.Database;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChannelsService.UseCases.TransferOwnership;
+namespace ChannelsService.Commands.TransferOwnership;
 
-internal sealed class TransferOwnershipHandler : IHandler<TransferOwnershipCommand>
+internal sealed class TransferOwnershipCommandHandler : ICommandHandler<TransferOwnershipCommand>
 {
     private readonly DatabaseContext _context;
     
-    public TransferOwnershipHandler(DatabaseContext context)
+    public TransferOwnershipCommandHandler(DatabaseContext context)
     {
         _context = context;
     }

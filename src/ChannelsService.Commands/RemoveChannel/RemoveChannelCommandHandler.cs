@@ -4,13 +4,13 @@ using ChannelsService.External.Database;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChannelsService.UseCases.RemoveChannel;
+namespace ChannelsService.Commands.RemoveChannel;
 
-internal sealed class RemoveChannelHandler : IHandler<RemoveChannelCommand>
+internal sealed class RemoveChannelCommandHandler : ICommandHandler<RemoveChannelCommand>
 {
     private readonly DatabaseContext _context;
 
-    public RemoveChannelHandler(DatabaseContext context)
+    public RemoveChannelCommandHandler(DatabaseContext context)
     {
         _context = context;
     }

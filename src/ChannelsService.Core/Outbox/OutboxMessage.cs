@@ -9,7 +9,13 @@ public sealed partial class OutboxMessage
     public string? Payload { get; private init; }
     
     public bool IsCompleted { get; private set; }
-    
+
+    #region EF
+    #pragma warning disable
+    private OutboxMessage() { }
+    #pragma warning disable
+    #endregion
+
     private OutboxMessage(string discriminator, string payload)
     {
         Discriminator = discriminator;
