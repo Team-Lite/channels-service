@@ -9,4 +9,7 @@ public sealed partial class OutboxMessage
     
     public static OutboxMessage CreateUserLeftMessage(ChannelUserPayload payload) =>
         Create(Discriminators.UserLeft, payload);
+    
+    public static OutboxMessage CreateChannelRemovedMessage(ChannelPayload payload) =>
+        Create(Discriminators.ChannelWasRemoved, payload);
 }

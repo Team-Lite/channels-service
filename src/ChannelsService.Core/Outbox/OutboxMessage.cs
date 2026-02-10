@@ -4,9 +4,11 @@ namespace ChannelsService.Core.Outbox;
 
 public sealed partial class OutboxMessage
 {
+    public Guid Id { get; private init; }
+    
     public string Discriminator { get; private init; }
     
-    public string? Payload { get; private init; }
+    public string Payload { get; private init; }
     
     public bool IsCompleted { get; private set; }
 
@@ -18,22 +20,12 @@ public sealed partial class OutboxMessage
 
     private OutboxMessage(string discriminator, string payload)
     {
+        Id = Guid.CreateVersion7();
         Discriminator = discriminator;
         Payload = payload;
     }
 
     public void MarkAsCompleted() => IsCompleted = true;
-    
-    public T GetPayload<T>() where T : class
-    {
-        if (Payload is null) throw new InvalidOperationException("Message payload is null");
-        
-        T? deserializedPayload = JsonSerializer.Deserialize<T>(Payload);
-
-        if (deserializedPayload is null) throw new ArgumentException("Message has another type");
-        
-        return deserializedPayload;
-    }
 
     private static OutboxMessage Create(string discriminator, object payload)
     {

@@ -1,0 +1,41 @@
+using ChannelsService.Core.Entities;
+using ChannelsService.Core.Errors;
+using ChannelsService.Core.Outbox;
+using ChannelsService.Core.Outbox.Payloads;
+using ChannelsService.External.Database;
+using FluentResults;
+using Microsoft.EntityFrameworkCore;
+
+namespace ChannelsService.Application.RemoveChannel;
+
+internal sealed class RemoveChannelCommandHandler : ICommandHandler<RemoveChannelCommand>
+{
+    private readonly DatabaseContext _context;
+
+    public RemoveChannelCommandHandler(DatabaseContext context)
+    {
+        _context = context;
+    }
+    
+    public async Task<Result> HandleAsync(RemoveChannelCommand command)
+    {
+        Channel? channel = await _context
+            .Channels
+            .Include(x => x.Users)
+            .FirstOrDefaultAsync(x => x.Id == command.ChannelId);
+
+        if (channel is null) return Result.Fail(new ChannelNotFoundError(command.ChannelId));
+        
+        if (!channel.CheckOwnership(command.InitiatorId)) return Result.Fail(new OwnershipError());
+        
+        _context.Channels.Remove(channel);
+        
+        var payload = new ChannelPayload(command.ChannelId);
+        
+        _context.OutboxMessages.Add(OutboxMessage.CreateChannelRemovedMessage(payload));
+        
+        await _context.SaveChangesAsync();
+        
+        return Result.Ok();
+    }
+}

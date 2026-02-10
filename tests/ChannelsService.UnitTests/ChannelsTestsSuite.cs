@@ -144,14 +144,14 @@ public class ChannelsTestsSuite
         Assert.Contains(channel.Users, u => u.Id == ownerId && !u.IsOwner);
     }
 
-    private (Channel channel, Guid ownerId) CreateChannel()
+    private static (Channel channel, Guid ownerId) CreateChannel()
     {
         Guid userId = Guid.NewGuid();
         
         return (new Channel("testName", "testDescription", userId), userId);
     }
 
-    private void AssertUserNotFoundErrorAndIdCorrectness(Result result, Guid userId)
+    private static void AssertUserNotFoundErrorAndIdCorrectness(Result result, Guid userId)
     {
         Assert.True(result.IsFailed);
         Assert.True(result.HasError(x => x is UserNotFoundError userNotFoundError

@@ -1,11 +1,12 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/ChannelsService.Bootstrap/ChannelsService.Bootstrap.csproj" />
     <Project Path="src/ChannelsService.Core/ChannelsService.Core.csproj" />
     <Project Path="src/ChannelsService.External/ChannelsService.External.csproj" />
-    <Project Path="src\ChannelsService.Commands\ChannelsService.Commands.csproj" />
+    <Project Path="src\ChannelsService.Application\ChannelsService.Application.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/ChannelService.IntegrationTests/ChannelService.IntegrationTests.csproj" />
     <Project Path="tests/ChannelsService.UnitTests/ChannelsService.UnitTests.csproj" />
+    <Project Path="tests\ChannelsService.IntegrationTests\ChannelsService.IntegrationTests.csproj" />
   </Folder>
 </Solution>
