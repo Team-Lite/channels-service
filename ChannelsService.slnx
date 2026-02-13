@@ -3,6 +3,7 @@
     <Project Path="src/ChannelsService.Bootstrap/ChannelsService.Bootstrap.csproj" />
     <Project Path="src/ChannelsService.Core/ChannelsService.Core.csproj" />
     <Project Path="src/ChannelsService.External/ChannelsService.External.csproj" />
+    <Project Path="src/ChannelsService.Outbox/ChannelsService.Outbox.csproj" />
     <Project Path="src\ChannelsService.Application\ChannelsService.Application.csproj" />
   </Folder>
   <Folder Name="/tests/">

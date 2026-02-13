@@ -1,6 +1,7 @@
 using ChannelsService.Application;
 using ChannelsService.Bootstrap;
 using ChannelsService.External;
+using ChannelsService.Outbox;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,12 +16,22 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://test.com";
-        options.Audience = "Test";
+        options.Authority = "https://keycloak.monoclocker.ru/realms/lite-messenger";
+        options.Audience = "account";
     });
+
 builder.Services.AddAuthorization();
 
+builder.Services.AddOutboxProcessor();
+
+builder.Services.AddOpenApi();
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi("/openapi/api.json");
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
